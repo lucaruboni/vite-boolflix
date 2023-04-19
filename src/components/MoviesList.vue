@@ -18,7 +18,7 @@ export default{
         performSearch(){
             console.log('ciao', this.state.searchText);
 
-            const url = this.state.API_URL_MOVIES + `&query=${this.state.searchText}`;
+            const url = this.state.API_URL_MULTI + `&query=${this.state.searchText}`;
             console.log(url)
             this.state.fetchMovies(url)
         }
