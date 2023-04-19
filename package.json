@@ -13,7 +13,8 @@
     "bootstrap": "^5.2.3",
     "font-awesome": "^4.7.0",
     "sass": "^1.62.0",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "vue-country-flag-next": "^2.3.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
