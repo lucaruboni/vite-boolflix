@@ -8,6 +8,8 @@ export default{
     components: {
         CountryFlag
     },
+ 
+   
     
 
 }
@@ -17,6 +19,7 @@ export default{
     <div class="col">
                 <ul>
                     <li v-if="movie.media_type === 'movie'">
+                        <img src=""  alt="POSTER">
                         <h2>{{ movie.title }}</h2>
                         <h3 v-show="movie.title !== movie.original_title">{{ movie.original_title }}</h3>
                         <p v-if="movie.original_language === 'en'"><country-flag country='gb' size='small'/></p>
@@ -36,6 +39,7 @@ export default{
                         <p>Vote: {{ movie.vote_average }} ({{ movie.vote_count }})</p>
                     </li>
                     <li v-else>
+                        <img :src="movie.poster_path" alt="POSTER">
                         <h2 >{{ movie.name }}</h2>
                         <h3 v-show="movie.name !== movie.original_name">{{ movie.original_name }}</h3>
                         <p v-if="movie.original_language === 'en'"><country-flag country='gb' size='small'/></p>
