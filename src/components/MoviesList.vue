@@ -30,14 +30,17 @@ export default{
 
 <template>
        <main>
-        <SearchBox @makeSearch="performSearch()"></SearchBox>
+        <SearchBox class="mt-5 mx-5" @makeSearch="performSearch()"></SearchBox>
 
         <div class="container">
-           <div class="row row-cols-1 row-cols-md3 row-cols-lg-5 justify-content-center mt4">
+           
+            <ul class="row row-cols-1 row-cols-md3 row-cols-lg-5 justify-content-center mt-4 gap-3">
+                <MovieItem :movie="movie" v-for="movie in state.movies"></MovieItem>
+            </ul>
             
-              <MovieItem :movie="movie" v-for="movie in state.movies"></MovieItem>
+            
 
-           </div>
+           
         </div>
     </main>
 </template>
