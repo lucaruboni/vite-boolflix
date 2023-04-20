@@ -1,13 +1,15 @@
 <script>
 
-import CountryFlag from 'vue-country-flag-next'
+
+import FlagItem from './FlagItem.vue'
 export default{
     name: 'MovieItem',
     props:{
         movie: Object
     },
     components: {
-        CountryFlag,
+        
+        FlagItem
        
     },
  
@@ -30,14 +32,27 @@ export default{
         
     },
     numberToStars(){
-        if (this.movie.vote_average === 3) {
-            const star = document.getElementById('starId')
-            return star.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg> `
-        }
-        else{
-            return this.movie.poster_path
-        }
-    }
+        let stars = '<img src="./img/stella_piccola.png">';
+        //let star = document.getElementById('starId') 
+        let starstring = '';   
+            for (let i = 0; i < Math.ceil(this.movie.vote_average / 2); i++) {
+                    console.log(stars)
+                    starstring += stars;      
+                
+                }
+                return  starstring 
+     },
+     addNewClass(){
+        let liElement = document.querySelector('listName')
+        liElement.classList.add('active')        
+     },
+     removeClass(){
+        let liElement = document.querySelector('listName')
+        liElement.classList.remove('active')
+     }
+     
+
+  
     }
 
     
@@ -50,51 +65,28 @@ export default{
 <template>
     
                
-                    <li v-if="movie.media_type === 'movie'">
+                    <li class="listName" v-if="movie.media_type === 'movie'" @mouseenter="classList.add('active')" @mouseleave="not_active">
                         
                         <img :src="buildUrl()" alt="POSTER">
                         <h2>{{ movie.title }}</h2>
                         <h3 v-show="movie.title !== movie.original_title">{{ movie.original_title }}</h3>
-                        <p v-if="movie.original_language === 'en'"><country-flag country='gb' size='small'/></p>
-                        <p v-if="movie.original_language === 'it'"><country-flag country='it' size='small'/></p>
-                        <p v-if="movie.original_language === 'fr'"><country-flag country='fr' size='small'/></p>
-                        <p v-if="movie.original_language === 'es'"><country-flag country='es' size='small'/></p>
-                        <p v-if="movie.original_language === 'de'"><country-flag country='de' size='small'/></p>
-                        <p v-if="movie.original_language === 'zh'"><country-flag country='zh' size='small'/></p>
-                        <p v-if="movie.original_language === 'pt'"><country-flag country='pt' size='small'/></p>
-                        <p v-if="movie.original_language === 'sv'"><country-flag country='sv' size='small'/></p>
-                        <p v-if="movie.original_language === 'cn'"><country-flag country='cn' size='small'/></p>
-                        <p v-if="movie.original_language === 'hi'"><country-flag country='hi' size='small'/></p>
-                        <p v-if="movie.original_language === 'ta'"><country-flag country='ta' size='small'/></p>
-                        <p v-if="movie.original_language === 'jp'"><country-flag contry='jp' size='small'/></p>
-                        <p v-if="movie.original_language === 'kp'"><country-flag contry='kp' size='small'/></p>
-                        <p v-if="movie.original_language === 'kr'"><country-flag contry='kr' size='small'/></p>
+                        <FlagItem :movie="movie"></FlagItem>
+                       
 
                         
                        
-                        <p id="starId">Vote: {{ movie.vote_average }}  ({{ movie.vote_count }})</p>
+                        <p id="starId">Vote: <span v-html="numberToStars()"></span> ({{ movie.vote_count }})</p>
                     </li>
-                    <li v-else>
+                    <li class="listName" @mouseenter="addNewClass()" @mouseleave="removeClass()" v-else>
 
                         <img :src="buildUrl()" alt="POSTER">
                         <h2 >{{ movie.name }}</h2>
                         <h3 v-show="movie.name !== movie.original_name">{{ movie.original_name }}</h3>
-                        <p v-if="movie.original_language === 'en'"><country-flag country='gb' size='small'/></p>
-                        <p v-if="movie.original_language === 'it'"><country-flag country='it' size='small'/></p>
-                        <p v-if="movie.original_language === 'fr'"><country-flag country='fr' size='small'/></p>
-                        <p v-if="movie.original_language === 'es'"><country-flag country='es' size='small'/></p>
-                        <p v-if="movie.original_language === 'de'"><country-flag country='de' size='small'/></p>
-                        <p v-if="movie.original_language === 'zh'"><country-flag country='zh' size='small'/></p>
-                        <p v-if="movie.original_language === 'pt'"><country-flag country='pt' size='small'/></p>
-                        <p v-if="movie.original_language === 'sv'"><country-flag country='sv' size='small'/></p>
-                        <p v-if="movie.original_language === 'cn'"><country-flag country='cn' size='small'/></p>
-                        <p v-if="movie.original_language === 'hi'"><country-flag country='hi' size='small'/></p>
-                        <p v-if="movie.original_language === 'ta'"><country-flag country='ta' size='small'/></p>
-                        <p v-if="movie.original_language === 'jp'"><country-flag contry='jp' size='small'/></p>
-
+                        <FlagItem :movie="movie"></FlagItem>
+                       
                         
                        
-                        <p>Vote: {{ movie.vote_average }} ({{ movie.vote_count }})</p>
+                        <p>Vote: <span v-html="numberToStars()"></span> ({{ movie.vote_count }})</p>
                     </li>
                
             
@@ -115,6 +107,10 @@ li{
     img{
         width: 100%;
     }
+}
+
+svg{
+    height: 10px;
 }
 
 </style>

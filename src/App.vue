@@ -1,10 +1,12 @@
 <script>
 import {state} from './state.js';
 import AppMain from './components/AppMain.vue'
+import AppHeader from './components/AppHeader.vue'
 
 export default{
   components: {
-    AppMain
+    AppMain,
+    AppHeader
   },
   data(){
     return{
@@ -19,7 +21,7 @@ export default{
 </script>
 
 <template>
-
+  <AppHeader></AppHeader>
   <AppMain></AppMain>
   
 </template>

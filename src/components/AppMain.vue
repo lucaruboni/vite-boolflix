@@ -19,9 +19,17 @@ export default{
 </script>
 
 <template>
- <MovieList :movies="state.movies"></MovieList>
+    <main>
+        <MovieList :movies="state.movies"></MovieList>
+
+    </main>
+ 
 </template>
 
 <style lang="scss" scoped>
-
+    main{
+        height: calc(100vh - 110px);
+        background-color: black;
+        overflow-y: auto;
+    }
 </style>
