@@ -20,8 +20,8 @@ export default{
             return baseUrl + this.movie.poster_path
         }
     },
-    starsRating(){
-        const numberStar = Math.ceil(this.movie.vote_average / 2)
+    starsRating(vote){
+        const numberStar = Math.ceil(vote / 2)
         console.log(numberStar);
        
         return numberStar
@@ -58,7 +58,7 @@ export default{
 
                         
                        
-                        <p v-show="starsRating()">Vote: ({{ movie.vote_count }})</p>
+                        <p>Vote: {{ starsRating(movie.vote_average) }}  ({{ movie.vote_count }})</p>
                     </li>
                     <li v-else>
 
