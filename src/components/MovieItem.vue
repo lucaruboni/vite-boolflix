@@ -12,9 +12,15 @@ export default{
         FlagItem
        
     },
+    data(){
+        return{
+            isHover: false,
+            
+        }
+    },
  
    methods:{
-    buildUrl(){
+    buildUrlImg(){
         const baseUrl = "https://image.tmdb.org/t/p/w342";
         const sampleImg = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd-A62O_4UYnCwM3gaxn5N23PKkQBC0ZehpQ&usqp=CAU';
         if (this.movie.poster_path === undefined || this.movie.poster_path === null) {
@@ -41,17 +47,7 @@ export default{
                 
                 }
                 return  starstring 
-     },
-     addNewClass(){
-        let liElement = document.querySelector('listName')
-        liElement.classList.add('active')        
-     },
-     removeClass(){
-        let liElement = document.querySelector('listName')
-        liElement.classList.remove('active')
      }
-     
-
   
     }
 
@@ -65,34 +61,32 @@ export default{
 <template>
     
                
-                    <li class="listName" v-if="movie.media_type === 'movie'" @mouseenter="classList.add('active')" @mouseleave="not_active">
+                    <li class="listName" v-if="movie.media_type === 'movie'" @mouseover="isHover = true" @mouseleave="isHover = false">
                         
-                        <img :src="buildUrl()" alt="POSTER">
-                        <h2>{{ movie.title }}</h2>
-                        <h3 v-show="movie.title !== movie.original_title">{{ movie.original_title }}</h3>
-                        <FlagItem :movie="movie"></FlagItem>
-                       
-
-                        
-                       
-                        <p id="starId">Vote: <span v-html="numberToStars()"></span> ({{ movie.vote_count }})</p>
+                        <img :src="buildUrlImg()" :class="{ 'hidden': isHover }" alt="POSTER">
+                        <h2 :class="{ 'hidden': !isHover }">{{ movie.title }}</h2>
+                        <h3 :class="{ 'hidden': !isHover }" v-show="movie.title !== movie.original_title">{{ movie.original_title }}</h3>
+                        <FlagItem :class="{ 'hidden': !isHover }" :movie="movie"></FlagItem>
+                        <p  :class="{ 'hidden': !isHover }" id="starId">Vote: <span v-html="numberToStars()"></span> ({{ movie.vote_count }})</p>
                     </li>
+
                     <li class="listName" @mouseenter="addNewClass()" @mouseleave="removeClass()" v-else>
 
-                        <img :src="buildUrl()" alt="POSTER">
-                        <h2 >{{ movie.name }}</h2>
-                        <h3 v-show="movie.name !== movie.original_name">{{ movie.original_name }}</h3>
-                        <FlagItem :movie="movie"></FlagItem>
-                       
-                        
-                       
-                        <p>Vote: <span v-html="numberToStars()"></span> ({{ movie.vote_count }})</p>
+                        <img :src="buildUrlImg()" :class="{ 'hidden': isHover }" alt="POSTER" @mouseover="isHover = true" @mouseleave="isHover = false" >
+                        <h2 :class="{ 'hidden': !isHover }">{{ movie.name }}</h2>
+                        <h3 :class="{ 'hidden': !isHover }" v-show="movie.name !== movie.original_name">{{ movie.original_name }}</h3>
+                        <FlagItem :class="{ 'hidden': !isHover }" :movie="movie"></FlagItem>
+                        <p :class="{ 'hidden': !isHover }">Vote: <span v-html="numberToStars()"></span> ({{ movie.vote_count }})</p>
                     </li>
                
             
 </template>
 
 <style lang="scss" scoped>
+.hidden{
+    display: none;
+}
+
 ul{
     padding: 0;
     

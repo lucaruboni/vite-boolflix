@@ -14,7 +14,7 @@ export default{
     }
   },
   mounted(){
-    this.state.fetchMovies(this.state.API_URL_MOVIES),
+    this.state.fetchMovies(this.state.API_URL_MULTI),
     this.state.fetchTvSeries(this.state.API_URL_TV)
   }
 }
