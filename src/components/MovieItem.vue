@@ -1,4 +1,5 @@
 <script>
+
 import CountryFlag from 'vue-country-flag-next'
 export default{
     name: 'MovieItem',
@@ -6,7 +7,8 @@ export default{
         movie: Object
     },
     components: {
-        CountryFlag
+        CountryFlag,
+       
     },
  
    methods:{
@@ -18,15 +20,27 @@ export default{
         }
         else
             return baseUrl + this.movie.poster_path
-        }
-    },
-    starsRating(vote){
-        const numberStar = Math.ceil(vote / 2)
+        },
+        starsRating(vote){
+        let numberStar = Math.ceil(vote / 2)
         console.log(numberStar);
+        
        
         return numberStar
         
     },
+    numberToStars(){
+        if (this.movie.vote_average === 3) {
+            const star = document.getElementById('starId')
+            return star.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg> `
+        }
+        else{
+            return this.movie.poster_path
+        }
+    }
+    }
+
+    
    }
     
 
@@ -58,7 +72,7 @@ export default{
 
                         
                        
-                        <p>Vote: {{ starsRating(movie.vote_average) }}  ({{ movie.vote_count }})</p>
+                        <p id="starId">Vote: {{ movie.vote_average }}  ({{ movie.vote_count }})</p>
                     </li>
                     <li v-else>
 
