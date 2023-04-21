@@ -30,7 +30,7 @@ export default{
             <p class="w-50">New York: Travis Bickle, veterano del Vietnam in congedo, soffre d'insonnia e decide di impegnare le proprie notti facendo il tassista. Completamente disadattato ma idealista alla ricerca di uno scopo, l'uomo si invaghirà di una ragazza e le chiederà di uscire. Quando le cose tra i due andranno storte, Travis, definitivamente disilluso riguardo la società, si chiuderà in se stesso. Comincerà così per il tassista una claustrofobica discesa nel baratro della solitudine, in bilico sui margini della sanità mentale.</p>
           </div>
         </div>
-        <MovieList :movies="state.movies"  ></MovieList>
+        <MovieList :movies="state.movies" ></MovieList>
        
     
     </main>

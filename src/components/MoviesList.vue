@@ -26,7 +26,7 @@ export default{
         
            
             <ul class="row row-cols-1 row-cols-md3 row-cols-lg-8 justify-content-center pt-5 gap-3">
-                <MovieItem :movie="movie" v-for="movie in state.movies"></MovieItem>
+                <MovieItem :movie="movie"  v-for="movie in state.movies"></MovieItem>
             </ul>
             
             

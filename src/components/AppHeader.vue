@@ -1,10 +1,12 @@
 <script>
 import {state} from '../state.js'
 import SearchBox from './SearchBox.vue'
+import SelectBox from './SelectBox.vue'
 export default{
     name: 'AppHeader',
     components: {
-        SearchBox
+        SearchBox,
+        SelectBox
     },
     data(){
         return{
@@ -18,6 +20,13 @@ export default{
             const url = this.state.API_URL_MULTI + `&query=${this.state.searchText}`;
             console.log(url)
             this.state.fetchMovies(url)
+        },
+        performSelect(){
+            console.log('ciao', this.state.selectedGenre);
+
+            const url = this.state.API_URL_MULTI + `&query=${this.state.searchText}`
+            console.log(url)
+            this.state.fetchGenres(url)
         }
     }
 }
@@ -34,9 +43,13 @@ export default{
                     <a class=" align-self-center" href="">HOME</a>
                     <a class=" align-self-center" href="">FILM</a>
                     <a class=" align-self-center" href="">SERIE TV</a>
-                </div>            
-
-               <SearchBox class="mx-5 mt-3 align-self-center" @makeSearch="performSearch()"></SearchBox>
+                </div>   
+                
+                <div class="right_side d-flex justify-content-between">
+                    <SelectBox @makeSelect="performSelect()"></SelectBox>
+                     <SearchBox class="mx-5 mt-3 align-self-center" @makeSearch="performSearch()"></SearchBox>
+                </div>
+                
         
           </div>
         </nav>
@@ -60,6 +73,10 @@ export default{
 
         img{
             height: 100px;
+        }
+
+       .select_name{
+            width: 235px;
         }
     }
 </style>

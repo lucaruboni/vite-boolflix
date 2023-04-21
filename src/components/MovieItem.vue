@@ -5,7 +5,8 @@ import FlagItem from './FlagItem.vue'
 export default{
     name: 'MovieItem',
     props:{
-        movie: Object
+        movie: Object,
+        credits: Object
     },
     components: {
         
@@ -47,9 +48,10 @@ export default{
   
      
      searchCarachters(){
-
+       const API_URL_CREDITS = this.state.API_CREDITS_FIRST + `${this.state.movie.id}` + this.state.API_CREDITS_FINAL
+       return this.state.fetchCredits(API_URL_CREDITS)
      }
-  
+    
     }
 
     
@@ -63,6 +65,7 @@ export default{
     
                
                     <li class="listName" v-if="movie.media_type === 'movie'">
+                        
                         <div class="main_card">
                             <img :src="buildUrlImg()" alt="POSTER">
                         </div>
@@ -73,6 +76,9 @@ export default{
                             <h3 v-show="movie.title !== movie.original_title">{{ movie.original_title }}</h3>
                             <FlagItem :movie="movie"/>
                             <p>Vote: <img id="starId" src="public/stella_piccola.png" v-for="stars in ceilNumber()">({{ movie.vote_count }})</p>
+                            <p v-for="actor in credits">
+                                {{ actor.name }}
+                            </p>
                         </div>
 
                     </li>
