@@ -14,8 +14,8 @@ export default{
     },
     data(){
         return{
-            isHover: false,
-            stars: './img/stella_piccola.png"'
+           /*  isHover: false, */
+            stars: 'public/stella_piccola.png'
             
         }
     },
@@ -62,31 +62,41 @@ export default{
 <template>
     
                
-                    <li class="listName" v-if="movie.media_type === 'movie'" @mouseover="isHover = true" @mouseleave="isHover = false">
+                    <li class="listName" v-if="movie.media_type === 'movie'">
+                        <div class="main_card">
+                            <img :src="buildUrlImg()" alt="POSTER">
+                        </div>
                         
-                        <img :src="buildUrlImg()" :class="{ 'hidden': isHover }" alt="POSTER">
-                        <h2 :class="{ 'hidden': !isHover }">{{ movie.title }}</h2>
-                        <h3 :class="{ 'hidden': !isHover }" v-show="movie.title !== movie.original_title">{{ movie.original_title }}</h3>
-                        <FlagItem :class="{ 'hidden': !isHover }" :movie="movie" :is-hover="isHover"/>
-                        <p  :class="{ 'hidden': !isHover }" id="starId">Vote: <img :src="stars" v-for="stars in ceilNumber()">({{ movie.vote_count }})</p>
+                        
+                        <div class="hover_card">
+                            <h2>{{ movie.title }}</h2>
+                            <h3 v-show="movie.title !== movie.original_title">{{ movie.original_title }}</h3>
+                            <FlagItem :movie="movie"/>
+                            <p>Vote: <img id="starId" src="public/stella_piccola.png" v-for="stars in ceilNumber()">({{ movie.vote_count }})</p>
+                        </div>
+
                     </li>
 
-                    <li class="listName" @mouseenter="addNewClass()" @mouseleave="removeClass()" v-else>
+                    <li class="listName" v-if="movie.media_type === 'tv'">
+                        <div class="main_card">
+                            <img :src="buildUrlImg()" alt="POSTER">
+                        </div>
+                        
+                        
+                        <div class="hover_card">
+                            <h2>{{ movie.name }}</h2>
+                            <h3 v-show="movie.name !== movie.original_name">{{ movie.original_name }}</h3>
+                            <FlagItem :movie="movie"/>
+                            <p >Vote: <img id="starId" src="public/stella_piccola.png" v-for="stars in ceilNumber()">({{ movie.vote_count }})</p>
+                        </div>
 
-                        <img :src="buildUrlImg()" :class="{ 'hidden': isHover }" alt="POSTER" @mouseover="isHover = true" @mouseleave="isHover = false" >
-                        <h2 :class="{ 'hidden': !isHover }">{{ movie.name }}</h2>
-                        <h3 :class="{ 'hidden': !isHover }" v-show="movie.name !== movie.original_name">{{ movie.original_name }}</h3>
-                        <FlagItem :class="{ 'hidden': !isHover }" :movie="movie" :is-hover="isHover"/>
-                        <p :class="{ 'hidden': !isHover }">Vote: <img :src="stars" v-for="stars in ceilNumber()">({{ movie.vote_count }})</p>
                     </li>
+
                
             
 </template>
 
 <style lang="scss" scoped>
-.hidden{
-    display: none;
-}
 
 ul{
     padding: 0;
@@ -104,8 +114,28 @@ li{
     }
 }
 
-svg{
-    height: 10px;
+
+.main_card{
+    display: inline-block;
 }
 
+
+.hover_card{
+    display: none;
+}
+
+.listName:hover .main_card{
+    display: none;
+}
+
+.listName:hover .hover_card{
+    display: inline-block;
+}
+
+
+#starId{
+    height: 15px;
+    width: 15px;
+    aspect-ratio: 1 / 1;
+}
 </style>
