@@ -24,6 +24,12 @@ export const state = reactive({
             this.tv = response.data.results
             console.log(this.tv)
         })
+    },
+    fetchCharacters(url){
+        axios.get(url)
+        .then(response => {
+            this.characters = response.data.results
+        })
     }
 
 })
