@@ -20,11 +20,15 @@ export default{
 }
 </script>
 
-<template>
+<template >
   <AppHeader></AppHeader>
   <AppMain></AppMain>
-  
+
+
+
 </template>
+
+
 
 <style lang="scss" scoped>
 

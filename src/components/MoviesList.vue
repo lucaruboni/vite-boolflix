@@ -23,7 +23,7 @@ export default{
 <template>
        
        
-        <div class="container">
+        
            
             <ul class="row row-cols-1 row-cols-md3 row-cols-lg-8 justify-content-center pt-5 gap-3">
                 <MovieItem :movie="movie" v-for="movie in state.movies"></MovieItem>
@@ -32,7 +32,7 @@ export default{
             
 
            
-        </div>
+        
     
 </template>
 

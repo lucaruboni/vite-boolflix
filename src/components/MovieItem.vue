@@ -47,6 +47,9 @@ export default{
                 
                 }
                 return  starstring 
+     },
+     searchCarachters(){
+        
      }
   
     }
@@ -66,7 +69,7 @@ export default{
                         <img :src="buildUrlImg()" :class="{ 'hidden': isHover }" alt="POSTER">
                         <h2 :class="{ 'hidden': !isHover }">{{ movie.title }}</h2>
                         <h3 :class="{ 'hidden': !isHover }" v-show="movie.title !== movie.original_title">{{ movie.original_title }}</h3>
-                        <FlagItem :class="{ 'hidden': !isHover }" :movie="movie"></FlagItem>
+                        <FlagItem :class="{ 'hidden': !isHover }" :movie="movie" :is-hover="isHover"/>
                         <p  :class="{ 'hidden': !isHover }" id="starId">Vote: <span v-html="numberToStars()"></span> ({{ movie.vote_count }})</p>
                     </li>
 
@@ -75,7 +78,7 @@ export default{
                         <img :src="buildUrlImg()" :class="{ 'hidden': isHover }" alt="POSTER" @mouseover="isHover = true" @mouseleave="isHover = false" >
                         <h2 :class="{ 'hidden': !isHover }">{{ movie.name }}</h2>
                         <h3 :class="{ 'hidden': !isHover }" v-show="movie.name !== movie.original_name">{{ movie.original_name }}</h3>
-                        <FlagItem :class="{ 'hidden': !isHover }" :movie="movie"></FlagItem>
+                        <FlagItem :class="{ 'hidden': !isHover }" :movie="movie" :is-hover="isHover"/>
                         <p :class="{ 'hidden': !isHover }">Vote: <span v-html="numberToStars()"></span> ({{ movie.vote_count }})</p>
                     </li>
                
