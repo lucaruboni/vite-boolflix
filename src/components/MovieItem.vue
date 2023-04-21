@@ -15,6 +15,7 @@ export default{
     data(){
         return{
             isHover: false,
+            stars: './img/stella_piccola.png"'
             
         }
     },
@@ -41,18 +42,10 @@ export default{
     ceilNumber(){
        let roundedNumber = Math.ceil(this.movie.vote_average / 2)
        console.log(roundedNumber)
+       return roundedNumber
     },
-    numberToStars(rounded){
-        let stars = '<img src="./img/stella_piccola.png">';
-        //let star = document.getElementById('starId') 
-        let starstring = '';   
-            for (let i = 0; i < rounded; i++) {
-                    console.log(stars)
-                    starstring += stars;      
-                
-                }
-                return  starstring 
-     },
+  
+     
      searchCarachters(){
 
      }
@@ -75,7 +68,7 @@ export default{
                         <h2 :class="{ 'hidden': !isHover }">{{ movie.title }}</h2>
                         <h3 :class="{ 'hidden': !isHover }" v-show="movie.title !== movie.original_title">{{ movie.original_title }}</h3>
                         <FlagItem :class="{ 'hidden': !isHover }" :movie="movie" :is-hover="isHover"/>
-                        <p  :class="{ 'hidden': !isHover }" id="starId">Vote: <span v-html="numberToStars(roundedNumber)"></span> ({{ movie.vote_count }})</p>
+                        <p  :class="{ 'hidden': !isHover }" id="starId">Vote: <img :src="stars" v-for="stars in ceilNumber()">({{ movie.vote_count }})</p>
                     </li>
 
                     <li class="listName" @mouseenter="addNewClass()" @mouseleave="removeClass()" v-else>
@@ -84,7 +77,7 @@ export default{
                         <h2 :class="{ 'hidden': !isHover }">{{ movie.name }}</h2>
                         <h3 :class="{ 'hidden': !isHover }" v-show="movie.name !== movie.original_name">{{ movie.original_name }}</h3>
                         <FlagItem :class="{ 'hidden': !isHover }" :movie="movie" :is-hover="isHover"/>
-                        <p :class="{ 'hidden': !isHover }">Vote: <span v-html="numberToStars(roundedNumber)"></span> ({{ movie.vote_count }})</p>
+                        <p :class="{ 'hidden': !isHover }">Vote: <img :src="stars" v-for="stars in ceilNumber()">({{ movie.vote_count }})</p>
                     </li>
                
             
